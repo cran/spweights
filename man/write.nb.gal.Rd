@@ -19,5 +19,11 @@ write.nb.gal(nb, file)
 \seealso{\code{\link{read.gal}}}
 
 \examples{
+data(columbus)
+GALfile <- tempfile("GAL")
+write.nb.gal(col.gal.nb, GALfile)
+col.queen <- read.gal(GALfile)
+unlink(GALfile)
+summary(diffnb(col.queen, col.gal.nb))
 }
 \keyword{spatial}

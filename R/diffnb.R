@@ -19,7 +19,6 @@ diffnb <- function(x, y, verbose=TRUE) {
 	if(n != length(y)) stop("lengths differ")
 	res <- vector(mode="list", length=n)
 	for (i in 1:n) {
-		res[[i]] <- NULL
 		xi <- x[[i]]
 		yi <- y[[i]]
 		xt <- xi %in% yi

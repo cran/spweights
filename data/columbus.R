@@ -1,2 +1,0 @@
-load("columbus.rda")
-

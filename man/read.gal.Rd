@@ -26,6 +26,11 @@ The function returns an object of class \code{nb} with a list of integer vectors
 
 \examples{
 data(columbus)
-summary(col.gal.nb)
+data(columbus)
+GALfile <- tempfile("GAL")
+write.nb.gal(col.gal.nb, GALfile)
+col.queen <- read.gal(GALfile)
+unlink(GALfile)
+summary(diffnb(col.queen, col.gal.nb))
 }
 \keyword{spatial}

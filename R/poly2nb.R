@@ -74,11 +74,7 @@ poly2nb <- function(pl, bb, brute.search=FALSE, row.names=NULL) {
 	    }
 	    class(cand) <- "nb"
 	    cands <- nblag(cand, 2)
-	    cand1 <- cand
-	    for (i in 1:n) {
-		cand1[[i]] <- sort(unique(c(cand1[[i]], cands[[2]][[i]])))
-		cand1[[i]] <- cand1[[i]][cand1[[i]] != i]
-	    }
+	    cand1 <- union.nb(cands[[1]], cands[[2]])
 	}
 	ans <- vector(mode="list", length=n)
 	if (multiparts) {
