@@ -1,0 +1,24 @@
+airdist                  Measure distance from plot
+card                     Cardinalities for neighbours lists
+cell2nb                  Generate neighbours list for grid cells
+columbus                 Columbus OH spatial analysis data set
+diffnb                   Differences between neighbours lists
+dnearneigh               Neighbourhood contiguity by distance
+edit.neighbours          Interactive editing of neighbours lists
+include.self             Include self in neighbours list
+invIrM                   Compute SAR generating operator
+knearneigh               K nearest neighbours for spatial weights
+knn2nb                   Neighbours list from knn object
+listw2sn                 Spatial neighbour sparse representation
+nb2listw                 Spatial weights for neighbours lists
+nb2mat                   Spatial weights matrices for neighbours lists
+nbdists                  Spatial link distance measures
+nblag                    Higher order neighbours lists
+plot.nb                  Plot a neighbours list
+plotpolys                Plot polygons
+poly2nb                  Construct neighbours list from polygon list
+read.gal                 Read a GAL lattice file into a neighbours list
+summary.nb               Summary function for neighbours lists
+testnb                   Test a neighbours list for symmetry
+tri2nb                   Neighbours list from tri object
+write.nb.gal             Write a neighbours list as a GAL lattice file
