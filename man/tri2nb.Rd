@@ -12,7 +12,7 @@ tri2nb(coords, row.names = NULL)
 }
 \arguments{
   \item{coords}{matrix of point coordinates with two columns}
-  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}
+  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}}
 }
 \value{
 The function returns an object of class \code{nb} with a list of integer vectors containing neighbour region number ids.

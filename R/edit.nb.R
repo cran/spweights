@@ -1,4 +1,4 @@
-edit.neighbours <- function(nb, coords, polys=NULL, bbs=NULL) {
+edit.nb <- function(nb, coords, polys=NULL, bbs=NULL) {
 	if (class(nb) != "nb") stop("Not a neighbours list")
 	x <- coords[,1]
 	y <- coords[,2]

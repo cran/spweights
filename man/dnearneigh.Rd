@@ -11,7 +11,7 @@ dnearneigh(x, d1, d2, row.names = NULL)
   \item{x}{matrix of point coordinates}
   \item{d1}{lower distance bound}
   \item{d2}{upper distance bound}
-  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}
+  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}}
 }
 \value{
 The function returns a list of integer vectors giving the region id numbers

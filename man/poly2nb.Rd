@@ -12,7 +12,7 @@ poly2nb(pl, bb, brute.search = FALSE, row.names = NULL)
   \item{pl}{list of polygons og class \code{polylist}}
   \item{bb}{matrix of polygon bounding boxes - columns are LL(x), LL(y), UR(x), UR(y)}
   \item{brute.search}{if FALSE use bounding boxes to restrict searches to lists of regions with intersecting bounding boxes}
-  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}; if \code{polys} has a \code{region.id} attribute, it is copied to the neighbours list.
+  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}; if \code{polys} has a \code{region.id} attribute, it is copied to the neighbours list.}
 }
 \value{
 A neighbours list with class \code{nb}

@@ -1,5 +1,5 @@
-\name{edit.neighbours}
-\alias{edit.neighbours}
+\name{edit.nb}
+\alias{edit.nb}
 \title{Interactive editing of neighbours lists}
 \description{
 The function provides simple interactive editing of neighbours lists to
@@ -9,7 +9,7 @@ committing. If the result is not assigned to a new object, the editing
 will be lost - as in \code{edit}.
 }
 \usage{
-edit.neighbours(nb, coords, polys=NULL, bbs=NULL)
+edit.nb(nb, coords, polys=NULL, bbs=NULL)
 }
 
 \arguments{

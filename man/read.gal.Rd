@@ -10,7 +10,7 @@ read.gal(file, row.names=NULL)
 
 \arguments{
   \item{file}{name of file with GAL lattice data}
-  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}
+  \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}}
 }
 \details{
 Luc Anselin (1995): SpaceStat; GAL - Geographical Algorithms
