@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{poly2nb}
 \alias{poly2nb}
 \title{Construct neighbours list from polygon list}

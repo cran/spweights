@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{listw2sn}
 \alias{listw2sn}
 \title{Spatial neighbour sparse representation}

@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{nblag}
 \alias{nblag}
 \title{Higher order neighbours lists}
@@ -26,6 +27,6 @@ plot(col.gal.nb, coords, add=T)
 title(main="GAL order 1 (black) and 2 (red) links")
 col.lags <- nblag(col.gal.nb, 2)
 summary(col.lags[[2]], coords)
-plot(col.lags[[2]], coords, add=T, col="red")
+plot(col.lags[[2]], coords, add=T, col="red", lty=2)
 }
 \keyword{spatial}

@@ -1,4 +1,4 @@
-# Copyright 2000 by Roger S. Bivand. 
+# Copyright 2000-1 by Roger S. Bivand. 
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -28,5 +28,6 @@ dnearneigh <- function(x, d1, d2, row.names=NULL) {
     attr(z[[1]], "region.id") <- row.names
     attr(z[[1]], "call") <- match.call()
     attr(z[[1]], "dnn") <- c(d1, d2)
+    z[[1]] <- sym.attr.nb(z[[1]])
     invisible(z[[1]])
 }

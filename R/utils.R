@@ -1,3 +1,16 @@
+# Copyright 2001 by Roger Bivand 
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+
 write.nb.gal <- function(nb, file) {
 	if(class(nb) != "nb") stop("not an nb object")
 	n <- length(nb)
@@ -11,25 +24,26 @@ write.nb.gal <- function(nb, file) {
 	close(con)
 }
 
-testnb <- function(nb)
+is.symmetric.nb <- function(nb, verbose=TRUE, force=FALSE)
 {
-	if(class(nb) != "nb")stop("Not neighbours list")
-	n <- length(nb)
-	fstop <- 0
-	for (i in 1:n) {
-		icard <- length(nb[[i]])
-		for (j in 1:icard) {
-			flag <- 0
-			k <- nb[[i]][j]
-			flag <- length(which(i %in% nb[[k]]))
-			if (flag != 1) {
-				fstop <- fstop + 1
-				cat("Non matching contiguities:", i,
-					"and", k, "\n")
-			}
-		}
+	if(class(nb) != "nb") stop("Not neighbours list")
+	nbsym <- attr(nb, "sym")
+	if(!is.null(nbsym)) res <- nbsym
+	if(force || is.null(nbsym)) {
+		res <- .Call("symtest", nb=nb, card=as.integer(card(nb)),
+			verbose=as.logical(verbose))
 	}
-	if(fstop != 0) cat("Non-symmetric neighbours list\n")
+	if(!res && verbose) cat("Non-symmetric neighbours list\n")
+	invisible(res)
+}
+
+sym.attr.nb <- function(nb) {
+	if(class(nb) != "nb") stop("Not neighbours list")
+	nbsym <- attr(nb, "sym")
+	if(is.null(nbsym))
+		attr(nb, "sym") <- is.symmetric.nb(nb, verbose=FALSE,
+			force=TRUE)
+	invisible(nb)
 }
 
 include.self <- function(nb) {
@@ -42,36 +56,30 @@ include.self <- function(nb) {
 	invisible(nb)
 }
 
-gabriel2nb <- function(gab, row.names=NULL) {
-	if (class(gab) != "Gabriel") stop("not an object from gabrielneigh")
-	res <- vector(mode="list", length=gab$np)
-	for (i in 1:gab$nedges) {
-		res[[gab$from[i]]] <- c(res[[gab$from[i]]],
-			gab$to[i])
-		res[[gab$to[i]]] <- c(res[[gab$to[i]]],
-			gab$from[i])
+# Copyright 2001 by Nicholas Lewin-Koh 
+
+make.sym.nb <- function(nb){
+	if(class(nb) != "nb") stop("Not neighbours list")
+	if (is.symmetric.nb(nb, FALSE, TRUE)) {
+		res <- nb
+	} else {
+        	k <- unlist(lapply(nb,length))
+        	to <- unlist(nb)
+        	from <- NULL
+        	res <- vector(mode="list", length=length(nb))
+        	for(i in 1:length(nb)){
+        		from <- c(from,rep(i,k[i]))
+        	}
+        	for(i in 1:length(nb)){
+        		res[[i]] <- sort(unique(c(to[from==i],from[to==i])))
+        		if(length(res[[i]]) == 0) res[[i]] <- 0
+        	}
+        	attr(res, "region.id") <- attr(nb,"region.id")
+        	attr(res, "call") <- attr(nb, "call")
+        	attr(res, "type") <- attr(nb, "type")
+        	attr(res, "sym") <- TRUE
+        	class(res) <- "nb"
 	}
-	for (i in 1:gab$np) res[[i]] <- sort(unique(res[[i]]))
-    	if (is.null(row.names)) row.names <- as.character(1:gab$np)
- 	attr(res, "region.id") <- row.names
-	attr(res, "Gabriel") <- attr(gab, "call")
-	class(res) <- "nb"
 	invisible(res)
 }
 
-relative2nb <- function(rel, row.names=NULL) {
-	if (class(rel) != "relative") stop("not an object from relativeneigh")
-	res <- vector(mode="list", length=rel$np)
-	for (i in 1:rel$nedges) {
-		res[[rel$from[i]]] <- c(res[[rel$from[i]]],
-			rel$to[i])
-		res[[rel$to[i]]] <- c(res[[rel$to[i]]],
-			rel$from[i])
-	}
-	for (i in 1:rel$np) res[[i]] <- sort(unique(res[[i]]))
-    	if (is.null(row.names)) row.names <- as.character(1:rel$np)
- 	attr(res, "region.id") <- row.names
-	attr(res, "relative") <- attr(rel, "call")
-	class(res) <- "nb"
-	invisible(res)
-}

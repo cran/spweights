@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{columbus}
 \alias{columbus}
 \alias{bbs}
@@ -74,8 +75,8 @@ plot(bbs[,1], bbs[,4], xlab="", ylab="", asp=1, type="n",
   xlim=range(c(bbs[,1],bbs[,3])), ylim=range(c(bbs[,2],bbs[,4])))
 for (i in 1:length(polys)) 
   polygon(polys[[i]], col=colours[codes(crime.f[i])])
-legend(x=c(5.8, 7.1), y=c(13.9, 15.2), legend=levels(crime.f),
-  fill=colours)
+legend(x=c(5.8, 7.1), y=c(13, 14.5), legend=levels(crime.f),
+  fill=colours, bty="n")
 title(main=paste("Columbus OH: residential burglaries and vehicle\nthefts",
   "per thousand households, 1980"))
 }

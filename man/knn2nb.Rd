@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{knn2nb}
 \alias{knn2nb}
 \title{Neighbours list from knn object}
@@ -7,12 +8,13 @@ into a neighbours list of class \code{nb} with a list of integer vectors
 containing neighbour region number ids.
 }
 \usage{
-knn2nb(knn, row.names = NULL)
+knn2nb(knn, row.names = NULL, sym = FALSE)
 }
 
 \arguments{
   \item{knn}{A knn object returned by \code{knearneigh}}
   \item{row.names}{character vector of region ids to be added to the neighbours list as attribute \code{region.id}, default \code{seq(1, nrow(x))}}
+  \item{sym}{force the output neighbours list to symmetry}
 }
 \value{
 The function returns an object of class \code{nb} with a list of integer vectors containing neighbour region number ids.

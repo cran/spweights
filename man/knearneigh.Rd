@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{knearneigh}
 \alias{knearneigh}
 \title{K nearest neighbours for spatial weights}

@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{plot.nb}
 \alias{plot.nb}
 \title{Plot a neighbours list}
@@ -26,6 +27,6 @@ data(columbus)
 plot(col.gal.nb, coords)
 title(main="GAL order 1 links with first nearest neighbours in red")
 col.knn <- knearneigh(coords, k=1)
-plot(knn2nb(col.knn), coords, add=T, col="red")
+plot(knn2nb(col.knn), coords, add=T, col="red", lty=2)
 }
 \keyword{spatial}

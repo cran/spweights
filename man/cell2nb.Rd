@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{cell2nb}
 \alias{cell2nb}
 \alias{mrc2vi}

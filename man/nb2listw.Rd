@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{nb2listw}
 \alias{nb2listw}
 \title{Spatial weights for neighbours lists}

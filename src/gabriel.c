@@ -1,8 +1,24 @@
+/* Copyright 2001 by Nicholas Lewin-Koh. 
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+**/
+
+
 #include <R.h>
+#include <Rmath.h>
+
 
 static double distance(double x1, double y1, double x2, double y2){
 
-  return((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+  return(pythag(x1-x2,y1-y2));
 
 }
 

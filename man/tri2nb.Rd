@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{tri2nb}
 \alias{tri2nb}
 \title{Neighbours list from tri object}

@@ -21,7 +21,9 @@ nb2listw <- function(neighbours, glist=NULL, style="W", zero.policy=FALSE)
 	vlist <- vector(mode="list", length=n)
 	if (is.null(glist)) {
 		glist <- vector(mode="list", length=n)
-		for (i in 1:n) glist[[i]] <- rep(1, length=cardnb[i])
+		for (i in 1:n)
+			if(cardnb[i] > 0) glist[[i]] <- rep(1, length=cardnb[i])
+			else glist[[i]] <- NULL
 		attr(vlist, "binary") <- TRUE
 	} else {
 		attr(vlist, "general") <- TRUE
@@ -37,32 +39,41 @@ nb2listw <- function(neighbours, glist=NULL, style="W", zero.policy=FALSE)
 	if (style == "W") {
 		d <- unlist(lapply(glist, sum))
 		for (i in 1:n) {
-			vlist[[i]] <- (1/d[i]) * glist[[i]]
-			if (zero.policy)
-				if (any(is.na(vlist[[i]])))
-					vlist[[i]] <- numeric(0)
+			if (cardnb[i] > 0) vlist[[i]] <- (1/d[i]) * glist[[i]]
+			else vlist[[i]] <- NULL
 		}
 	}
-	if (style == "B")
-		for (i in 1:n) vlist[[i]] <- rep(1, cardnb[i])
+	if (style == "B") {
+		for (i in 1:n) {
+			if (cardnb[i] > 0) vlist[[i]] <- rep(1, cardnb[i])
+			else vlist[[i]] <- NULL
+		}
+	}
 	if (style == "C") {
 		D <- sum(unlist(glist))
 		if (is.na(D) || !(D > 0))
 			stop(paste("Failure in sum of weights:", D))
-		for (i in 1:n) vlist[[i]] <- (n/D) * glist[[i]]
+		for (i in 1:n) {
+			if (cardnb[i] > 0)
+				vlist[[i]] <- (n/D) * glist[[i]]
+			else vlist[[i]] <- NULL
+		}
 	}
 	if (style == "S") {
-		glist <- lapply(glist, function(x) x^2)
-		q <- sqrt(unlist(lapply(glist, sum)))
-		for (i in 1:n) glist[[i]] <- (1/q[i]) * glist[[i]]
+		glist2 <- lapply(glist, function(x) x^2)
+		q <- sqrt(unlist(lapply(glist2, sum)))
+		for (i in 1:n) {
+			if (cardnb[i] > 0)
+				glist[[i]] <- (1/q[i]) * glist[[i]]
+			else glist[[i]] <- NULL
+		}
 		Q <- sum(unlist(glist))
 		if (is.na(Q) || !(Q > 0))
 		    stop(paste("Failure in sum of intermediate weights:", Q))
 		for (i in 1:n) {
-			vlist[[i]] <- (n/Q) * glist[[i]]
-			if (zero.policy)
-				if (any(is.na(vlist[[i]])))
-					vlist[[i]] <- numeric(0)
+			if (cardnb[i] > 0)
+				vlist[[i]] <- (n/Q) * glist[[i]]
+			else glist[[i]] <- NULL
 		}
 	}
 	style <- style

@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{summary.nb}
 \alias{summary.nb}
 \title{Summary function for neighbours lists}

@@ -1,4 +1,4 @@
-# Copyright 2001 by Roger Bivand
+# Copyright 2001 by Nicholas Lewin-Koh 
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -12,22 +12,12 @@
 #
 
 
-plot.nb <- function(x, coords, col="black", points=TRUE, add=FALSE, ...) {
-	nb <- x
-	x <- coords[,1]
-	y <- coords[,2]
-	n <- length(nb)
-	xlim <- range(x)
-	ylim <- range(y)
-	if (!add) {
-		plot.new()
-        	plot.window(xlim = xlim, ylim = ylim, log="", asp=1)
-	}
-	for (i in 1:n) {
-        	inb <- nb[[i]]
-        	for (j in inb)
-			lines(c(x[i], x[j]), c(y[i], y[j]),
-				col=col, ...)
-	}
-	if (points) points(x, y, ...)
+n.comp.nb <- function(nb.obj){
+  if(!inherits(nb.obj,"nb"))stop("not a neighbours list")
+  nb.obj <- make.sym.nb(nb.obj)
+  comp <- rep(0,length(nb.obj))
+  comp <- .Call("g_components", nb.obj, as.integer(comp))
+  answ <- list(nc=length(unique(comp)), comp.id=comp)
+  answ
 }
+

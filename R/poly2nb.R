@@ -1,5 +1,21 @@
+# Copyright 2001 by Roger Bivand
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+
+
 poly2nb <- function(pl, bb, brute.search=FALSE, row.names=NULL) {
-	if (class(pl) != "polylist") stop("Not a polygon list")
+	if (all(class(pl) != "polylist")) stop("Not a polygon list")
+	if ("multiparts" %in% class(pl)) multiparts <- TRUE
+	else  multiparts <- FALSE
 	n <- length(pl)
 	regid <- attr(pl, "region.id")
 	if (is.null(regid)) {
@@ -65,20 +81,43 @@ poly2nb <- function(pl, bb, brute.search=FALSE, row.names=NULL) {
 	    }
 	}
 	ans <- vector(mode="list", length=n)
+	if (multiparts) {
+		nparts <- integer(n)
+		for (i in 1:n) nparts[i] <- length(pl[[i]])
+	}
 	for (i in 1:n) {
 		leni <- length(cand[[i]])
 		if (leni > 0) {
 			candi <- cand1[[i]]
 			jhits <- NULL
-			nrpl <- nrow(pl[[i]])
+			if (multiparts) {
+				nrpl <- integer(nparts[i])
+				for (j in 1:nparts[i])
+					nrpl[j] <- nrow(pl[[i]][[j]])
+			} else nrpl <- nrow(pl[[i]])
 			for (j in 1:length(candi)) {
 				ji <- candi[j]
-				for (k in 1:nrpl) {
+				if (multiparts) {
+				    for (j1 in 1:nparts[i]) {
+					for (k in 1:nrpl[j1]) {
+					    for (j2 in 1:nparts[ji]) {
+					        res <- ptonpoly(pl[[i]]
+						    [[j1]][k,], pl[[ji]][[j2]])
+					        if (res) {
+						    jhits <- c(jhits, ji)
+						    break
+					        }
+					    }
+					}
+				    }
+				} else {
+				    for (k in 1:nrpl) {
 					res <- ptonpoly(pl[[i]][k,], pl[[ji]])
 					if (res) {
 						jhits <- c(jhits, ji)
 						break
 					}
+				    }
 				}
 			}
 			if (length(jhits) > 0) {
@@ -98,7 +137,7 @@ poly2nb <- function(pl, bb, brute.search=FALSE, row.names=NULL) {
 }
 
 plotpolys <- function(pl, bb, col=NA, border=par("fg"), add=FALSE) {
-	if (class(pl) != "polylist") stop("Not a polygon list")
+	if (all(class(pl) != "polylist")) stop("Not a polygon list")
 	if (!add) {
 		xlim <- c(min(bb[,1]), max(bb[,3]))
 		ylim <- c(min(bb[,2]), max(bb[,4]))
@@ -108,8 +147,14 @@ plotpolys <- function(pl, bb, col=NA, border=par("fg"), add=FALSE) {
 	if (length(col) != length(pl)) {
 		col <- rep(col, length(pl), length(pl))
 	}
-	for (j in 1:length(pl))
-		polygon(pl[[j]], col=col[j], border=border)
+	for (j in 1:length(pl)) {
+		if ("multiparts" %in% class(pl)) {
+			for (k in 1:length(pl[[j]]))
+				polygon(pl[[j]][[k]], col=col[j], border=border)
+		} else {
+			polygon(pl[[j]], col=col[j], border=border)
+		}
+	}
 }
 	
 

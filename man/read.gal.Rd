@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{read.gal}
 \alias{read.gal}
 \title{Read a GAL lattice file into a neighbours list}

@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{edit.nb}
 \alias{edit.nb}
 \title{Interactive editing of neighbours lists}

@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{diffnb}
 \alias{diffnb}
 \title{Differences between neighbours lists}
@@ -29,7 +30,7 @@ nb2 <- knn2nb(knn2, row.names=rownames(columbus))
 diffs <- diffnb(nb2, nb1)
 plotpolys(polys, bbs, border="grey")
 plot(nb1, coords, add=T)
-plot(diffs, coords, add=T, col="red")
-title(main="Plot of first (black) and second(red)\nnearest neighbours")
+plot(diffs, coords, add=T, col="red", lty=2)
+title(main="Plot of first (black) and second (red)\nnearest neighbours")
 }
 \keyword{spatial}

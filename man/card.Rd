@@ -1,3 +1,4 @@
+% Copyright 2001 by Roger S. Bivand
 \name{card}
 \alias{card}
 \title{Cardinalities for neighbours lists}
