@@ -1,4 +1,5 @@
-edit.nb <- function(nb, coords, polys=NULL, bbs=NULL) {
+edit.nb <- function(name, coords, polys=NULL, bbs=NULL, ...) {
+	nb <- name
 	if (class(nb) != "nb") stop("Not a neighbours list")
 	x <- coords[,1]
 	y <- coords[,2]
@@ -23,7 +24,7 @@ edit.nb <- function(nb, coords, polys=NULL, bbs=NULL) {
 	while (finished == "n") {
 		cat("Identifying contiguity for deletion ...\n")
 		cand <- identify(x, y, n=2)
-		bringToTop(-1)
+		if (.Platform$OS.type == "windows") bringToTop(-1)
 		if ((cand[2] %in% nb[[cand[1]]]) && (cand[1] %in% nb[[cand[2]]])) {
 			lines(x[cand], y[cand], col="red")
 			delete <- readline("Delete this line (y/n) ")
@@ -41,10 +42,11 @@ edit.nb <- function(nb, coords, polys=NULL, bbs=NULL) {
 					nb[[cand[2]]] <- 0
 					cat(cand[2], "is now an island\n")
 				}
+				cat("deleted contiguity between point",
+					cand[1], "and", cand[2], "\n")
+
  			}
-			cat("deleted contiguity between point", cand[1],
-				"and", cand[2], "\n")
-			plot.new()
+						plot.new()
 	        	plot.window(xlim = xlim, ylim = ylim, "", asp=1)
 			if (!is.null(polys) && !is.null(bbs))
 				plotpolys(polys,bbs, border="grey", add=T)

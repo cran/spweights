@@ -1,10 +1,11 @@
-summary.nb <- function(nb, coords=NULL) {
+summary.nb <- function(object, coords=NULL, ...) {
+    nb <- object
     if (class(nb) != "nb") stop("Not a neighbours list")
     c.nb <- card(nb)
     n.nb <- length(nb)
     regids <- attr(nb, "region.id")
     if(is.null(regids)) regids <- as.character(1:n.nb)
-    cat("Connectivity of", deparse(substitute(nb)),
+    cat("Connectivity of", deparse(substitute(object)),
     	"with the following attributes:\n")
     print(str(attributes(nb)))
     cat("Number of regions:", n.nb, "\n")

@@ -5,12 +5,11 @@
 The function creates higher order neighbour lists, where higher order neighbours are only \code{lags} links from each other on the graph described by the input neighbours list. It will refuse to lag neighbours lists with the attribute self.included set to TRUE.
 }
 \usage{
-nblag(neighbours, maxlag, sptimes=1)
+nblag(neighbours, maxlag)
 }
 \arguments{
   \item{neighbours}{input neighbours list of class \code{nb}}
   \item{maxlag}{the maximum lag to be constructed}
-  \item{sptimes}{a memory tuning cludge (to be removed)}
 }
 \value{
 returns a list of lagged neighbours lists each with class \code{nb}

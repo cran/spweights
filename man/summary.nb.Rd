@@ -7,12 +7,13 @@ matrix of coordinates is given as well, summary descriptive measures for
 the link lengths are also printed.
 }
 \usage{
-summary.nb(nb, coords=NULL)
+summary.nb(object, coords=NULL, ...)
 }
 
 \arguments{
-  \item{nb}{an object of class \code{nb}}
+  \item{object}{an object of class \code{nb}}
   \item{coords}{matrix of region point coordinates}
+  \item{...}{additional arguments affecting the summary produced}
 }
 \author{Roger Bivand \email{Roger.Bivand@nhh.no}}
 
