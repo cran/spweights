@@ -1,0 +1,38 @@
+#include <R.h>
+
+static double distance(double x1, double y1, double x2, double y2){
+
+  return((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+
+}
+
+void compute_gabriel(int *no_nodes, int *g1, int *g2, int *nogab,
+                    double *nodes_xd, double *nodes_yd)
+ {
+   int i,j,l, no_gab=0;
+   double mx, my, rad;
+   
+
+   for(i=0;i<*no_nodes;i++)
+     {
+       for(j=i+1;j<*no_nodes;j++)
+	 {
+	   mx=(nodes_xd[i]+nodes_xd[j])/2;
+	   my=(nodes_yd[i]+nodes_yd[j])/2;
+	   rad=distance(mx,my,nodes_xd[i],nodes_yd[i]);
+
+	   for(l=0;l<*no_nodes;l++)
+	     {
+	       if((l!=i)&&(l!=j)&&
+		  (distance(mx,my,nodes_xd[l],nodes_yd[l])<rad)) break;
+	     }
+
+	   if(l==*no_nodes)
+	     {
+	       g1[no_gab]=i+1; g2[no_gab++]=j+1;
+	     }
+	 }
+     }
+  *nogab=no_gab;
+  return;
+ }

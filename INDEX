@@ -5,6 +5,7 @@ columbus                 Columbus OH spatial analysis data set
 diffnb                   Differences between neighbours lists
 dnearneigh               Neighbourhood contiguity by distance
 edit.nb                  Interactive editing of neighbours lists
+graphneigh               Graph based spatial weights
 include.self             Include self in neighbours list
 invIrM                   Compute SAR generating operator
 knearneigh               K nearest neighbours for spatial weights
